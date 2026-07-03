@@ -85,3 +85,9 @@ jobs:
             context: ./backend
             push: true
             tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-backend-advance:latest 
+
+   deploy:
+     needs: [frontend,backend]
+     uses: ./gitgub/workflows/cd.yml
+     secrets: inherit
+        
