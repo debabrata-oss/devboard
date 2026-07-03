@@ -44,6 +44,6 @@ jobs:
           with:
             context: ./frontend/Dockerfil
             push: true
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-frontend:latest 
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-frontend-adv:latest 
 
         
