@@ -12,7 +12,7 @@ on:
 
 jobs:
     deploy:
-        run-on: self-hosted 
+        runs-on: self-hosted 
         steps:
           - name: Code Checkout
             uses: actions/checkout@v7
