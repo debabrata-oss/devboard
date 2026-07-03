@@ -88,6 +88,6 @@ jobs:
 
    deploy:
       needs: [frontend,backend]
-      uses: ./github/workflows/cd.yml
+      uses: ./.github/workflows/cd.yml
       secrets: inherit
 
