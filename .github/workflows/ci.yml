@@ -5,14 +5,10 @@ name: CI
 
 on: 
   push:
-      paths:
-        - '**'
-        - '!.github/workflows/**'
-      branches:  [advance]
-
+      branches:  [feat/matrix-docker-build]
 
 jobs:
-   frontend:
+   lint-frontend:
       runs-on: ubuntu-latest      
       steps: 
         - name: Checkout code
@@ -36,22 +32,8 @@ jobs:
         - name: Run Tests
           run: npm run test
           working-directory: frontend
-
-        - name: Docker setup[login]
-          uses: docker/login-action@v4
-          with:
-           username: ${{ vars.DOCKERHUB_USERNAME }}
-           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-        - name: Docker build and push 
-          uses: docker/build-push-action@v7
-          with:
-            context: ./frontend
-            push: true
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-frontend-advance:latest 
-
         
-   backend:
+   lint-backend:
       runs-on: ubuntu-latest      
       steps: 
         - name: Checkout code
@@ -77,6 +59,19 @@ jobs:
           run: go test
           working-directory: backend
 
+        
+
+   build-and-push:
+      needs: [lint-frontend,lint-backend]
+      runs-on: ubuntu-latest     
+      strategy:
+           fail-fast: false
+           matrix:
+               folder: ['frontend','backend'] 
+      steps: 
+        - name: Checkout code
+          uses: actions/checkout@v7
+
         - name: Docker setup[login]
           uses: docker/login-action@v4
           with:
@@ -86,12 +81,12 @@ jobs:
         - name: Docker build and push 
           uses: docker/build-push-action@v7
           with:
-            context: ./backend
+            context: ./${{ matrix.folder }}
             push: true
-            tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-backend-advance:latest 
+            tags: ${{ vars.DOCKERHUB_USERNAME }}/devboards-${{matrix.folder}}-advance:latest
 
    deploy:
-      needs: [frontend,backend]
+      needs: [lint-frontend,lint-backend,build-and-push]
       uses: ./.github/workflows/cd.yml
       secrets: inherit
 
