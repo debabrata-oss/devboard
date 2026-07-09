@@ -16,6 +16,6 @@ jobs:
                 fetch-depth: 0
 
             - name: GitLeaks Scanner 
-              uses: gitleaks/gitleaks-actionsz@v3
+              uses: gitleaks/gitleaks-actions@v3
               env: 
                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
