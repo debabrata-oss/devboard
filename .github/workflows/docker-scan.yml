@@ -1,0 +1,26 @@
+# Gole -  ensure the docker  images are security testeted 
+name:  Docker Scan
+
+on:
+    workflow_call:
+
+
+jobs: 
+    docker-file-lint-and-scan:
+          runs-on: ubuntu-latest
+          strategy: 
+              fail-fast: false
+              matrix: 
+                  folders: ['backend','frontend'] 
+          steps: 
+              - name: Code Checkout 
+                uses: actions@checkout@v7
+
+              - name: ${{ matrix.folders }} Lint
+                uses: hadolint/hadolint-action@v3.1.0
+                with: 
+                   dockerfile: ${{ matrix.folders }}/Dockerfile
+              
+    
+
+           
