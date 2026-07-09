@@ -1,0 +1,48 @@
+# Goal - I have to SAST my code 
+name:  Code Quality 
+
+on:
+   workflows_call:  # you can call this workflow before and after any other workflow 
+
+jobs:
+    sast: 
+        runs_on: ubuntu-latest
+        steps:
+            - name: Code checkout
+              uses: action/checkout@v7
+
+            - name: Setup NodeJs 
+              uses: actions/setup-node@v6
+              with:
+                node-version: '22'
+                cache: npm
+                cache-dependency-path: frontend/package-lock.json    
+
+            - name: Install npm packages 
+              run: npm ci
+              working-directory: frontend
+
+            - name: Run Linter
+              run: npm run lint 
+              working-directory: frontend
+
+            - name: Setup Go
+              uses: actions/setup-go@v6
+              with:
+                go-version: '1.23'
+                go-version-file: 'go.mod'
+                check-latest: false
+                cache-dependency-path: go.sum
+
+            - name: Run go Formatter
+              run: go fmt
+              working-directory: backend
+
+            - name: Run go vet
+              run: go vet
+              working-directory: backend
+
+
+           
+             
+
