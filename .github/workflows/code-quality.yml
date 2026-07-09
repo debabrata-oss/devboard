@@ -2,7 +2,7 @@
 name:  Code Quality 
 
 on:
-   workflows_call:  # you can call this workflow before and after any other workflow 
+   workflow_call:  # you can call this workflow before and after any other workflow 
 
 jobs:
     sast: 
