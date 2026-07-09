@@ -9,6 +9,7 @@ on:
 jobs:
     scan-secrets:
         runs-on: ubuntu-latest
+        
         steps: Code Checkout
         uses: actions/checkout@v7
         with:
