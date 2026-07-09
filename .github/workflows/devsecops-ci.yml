@@ -11,4 +11,4 @@ jobs:
    
     # Code stage (with shifr left )
     code-quality: 
-        uses: ./.github/workflow/code-quality.yml
+        uses: ./.github/workflows/code-quality.yml
