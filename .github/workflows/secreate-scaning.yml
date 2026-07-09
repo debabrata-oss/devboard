@@ -1,0 +1,20 @@
+# Gole - To ensue no secrets have been leaked in the code 
+
+name:  Screctes Scanning 
+
+on:
+  workflow_call:
+    
+
+jobs:
+    scan-secrets:
+        runs-on: ubuntu-latest
+        steps: Code Checkout
+        uses: actions/checkout@v7
+        with:
+           fetch-depth: 0
+
+        steps: GitLeaks Scanner 
+        uses: gitLeaks/gitLeaks-actionsz@v3
+        env: 
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

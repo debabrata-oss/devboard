@@ -12,3 +12,7 @@ jobs:
     # Code stage (with shifr left )
     code-quality: 
         uses: ./.github/workflows/code-quality.yml
+
+    # Secret Scanning
+    secreate-scaning:
+        uses: ./.github/workflows/secreate-scaning.yml 
