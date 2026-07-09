@@ -16,3 +16,7 @@ jobs:
     # Secret Scanning
     secreate-scaning:
         uses: ./.github/workflows/secreate-scaning.yml 
+
+   # Dependency check 
+    dependency-checks:
+        uses: ./github/workflows/dependency-scan.yml
