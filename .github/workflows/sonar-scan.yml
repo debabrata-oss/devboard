@@ -3,11 +3,11 @@
 name: Sonar Qube Sacn
 
 on: 
-   workflow_call:
+    workflow_call:
 
 jobs: 
      sonar-scanner: 
-         runs-on: ubunty-latest
+         runs-on: ubuntu-latest
          steps: 
              - name: Code Checkout
                uses: actions/checkout@v7
