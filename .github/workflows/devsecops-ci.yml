@@ -8,7 +8,8 @@ on:
       branches: [master]
 
 jobs:
-   
+    ## ------------------------ CI---------------------------------------
+
     # Code stage (with shifr left )
     code-quality: 
         uses: ./.github/workflows/code-quality.yml
@@ -43,3 +44,12 @@ jobs:
          uses: ./.github/workflows/docker-push.yml
          needs: [code-quality,code-tests,sonar-qube,docker-checks,dependency-checks,secreate-scaning]
          secrets: inherit
+
+    ###--- CD-------
+
+    deploy:
+        needs: [docker-push]
+        uses: ./.github/workflows/deploy.yml
+        secrets: inherit
+
+   
