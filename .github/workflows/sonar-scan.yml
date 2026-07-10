@@ -1,0 +1,19 @@
+# Gole- to check weather the application code coverage doesnot have security threats/issues 
+
+name: Sonar Qube Sacn
+
+on: 
+   workflpw_call:
+
+jobs: 
+     sonar-scanner: 
+         runs-on: ubunty-latest
+         steps: 
+             - name: Code Checkout
+               uses: actions/checkout@v7
+             
+             - name: SonarQube Scanner 
+               uses: SonarSource/sonarqube-scan-action@v8.2.0
+               env:
+                 SONAR_TOKEN:  ${{ secrets.SONAR_TOKEN }}
+                 SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
