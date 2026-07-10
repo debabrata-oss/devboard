@@ -10,6 +10,9 @@ RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o devboard-backend .
 
+# Switch back to non-root at end of builder stage to satisfy hadolint
+USER nobody
+
 FROM dhi.io/golang:1-alpine
 
 WORKDIR /app
