@@ -3,7 +3,7 @@
 name: Sonar Qube Sacn
 
 on: 
-   workflpw_call:
+   workflow_call:
 
 jobs: 
      sonar-scanner: 
