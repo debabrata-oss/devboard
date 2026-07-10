@@ -32,7 +32,7 @@ jobs:
                 working-directory: ${{ matrix.folders }}
 
               - name: Run Trivy vulnelabilty Scanner
-                used: aquasecurity/trivy-action@v0.36.0
+                uses: aquasecurity/trivy-action@v0.36.0
                 with:
                   image-ref: ${{ vars.DOCKERHUB_USERNAME }}/devboards-${{ matrix.folders }}-advance:latest 
                   format: 'table'
