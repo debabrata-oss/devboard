@@ -25,9 +25,16 @@ jobs:
     docker-checks:
         uses: ./.github/workflows/docker-scan.yml
         secrets: inherit
-   
+   # Sonar Qube
     sonar-qube:
         uses: ./.github/workflows/sonar-scan.yml
         secrets: inherit
         
+   # Code-Tests
+
+    code-tests:
+        uses: ./.github/workflows/code-tests.yml
+        
+
+
     #push-to-dockerhub:
